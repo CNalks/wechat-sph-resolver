@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import random
 import time
-from urllib.parse import urlparse
+from urllib.parse import parse_qs, urlparse
 
 import httpx
 
@@ -101,9 +101,9 @@ async def get_feed_info(client: httpx.AsyncClient, export_id: str, general_token
 
 def extract_feed_params(playable_url: str) -> tuple[str, str]:
     parsed = urlparse(playable_url)
-    query = dict(part.split("=", 1) for part in parsed.query.split("&") if "=" in part)
-    token = query.get("token", "")
-    export_id = query.get("eid", "")
+    query = parse_qs(parsed.query)
+    token = (query.get("token") or [""])[0]
+    export_id = (query.get("eid") or [""])[0]
     if not token or not export_id:
         raise ResolveError("playable_url missing token/eid")
     return token, export_id

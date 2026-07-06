@@ -19,6 +19,12 @@ def test_extract_feed_params():
     assert eid == "eid123"
 
 
+def test_extract_feed_params_decodes_export_id():
+    token, eid = extract_feed_params("https://channels.weixin.qq.com/x?token=tok%2B1&eid=export%2Fabc")
+    assert token == "tok+1"
+    assert eid == "export/abc"
+
+
 @pytest.mark.anyio
 async def test_resolve_share_url_flow(monkeypatch):
     calls = []
