@@ -1,0 +1,9 @@
+This resolver is an independent lightweight implementation for a private
+knowledge-base ingestion workflow.
+
+The request flow is based on public research and behavior from:
+
+- https://github.com/ltaoo/wx_channels_download
+
+The original project is distributed under MIT plus Commons Clause terms. This
+repository does not vendor or redistribute that project.
