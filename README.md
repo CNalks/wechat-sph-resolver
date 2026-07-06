@@ -56,6 +56,20 @@ Then configure the inbox service:
 SPH_RESOLVER_URL=http://127.0.0.1:8020/api/fetch_video_profile
 ```
 
+## systemd
+
+```bash
+cp .env.example .env
+# edit .env and fill YUANBAO_COOKIE
+python -m venv .venv
+. .venv/bin/activate
+pip install -r requirements.txt
+cp systemd/wechat-sph-resolver.service /etc/systemd/system/
+systemctl daemon-reload
+systemctl enable --now wechat-sph-resolver
+curl http://127.0.0.1:8020/healthz
+```
+
 ## Notes
 
 This implementation follows the public SPH resolution flow documented by

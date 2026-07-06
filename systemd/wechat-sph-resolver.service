@@ -1,0 +1,14 @@
+[Unit]
+Description=WeChat SPH Resolver FastAPI service
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/wechat-sph-resolver
+EnvironmentFile=/opt/wechat-sph-resolver/.env
+ExecStart=/opt/wechat-sph-resolver/.venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8020
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
